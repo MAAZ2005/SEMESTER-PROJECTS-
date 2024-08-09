@@ -62,144 +62,6 @@ public:
     void displayDetails() const override {
         cout << "Name: " << name << ", Category: " << category << ", Price: $" << price << endl;
     }
-    void addGrocery() {
-    string name, company;
-    float price;
-    cout << "Enter grocery name: ";
-    cin.ignore();
-    getline(cin, name);
-    cout << "Enter company: ";
-    getline(cin, company);
-    cout << "Enter price: ";
-    cin >> price;
-
-    ofstream outFile("grocery.txt", ios::app);
-    if (!outFile) {
-        cerr << "Unable to open file 'grocery.txt' for writing.\n";
-        return;
-    }
-    outFile << name << ", " << company << ", " << price << endl;
-    cout << "Grocery item added successfully.\n";
-}
-
-void addGroceryDeal() {
-    string deal;
-    cout << "Enter deal for grocery: ";
-    cin.ignore();
-    getline(cin, deal);
-
-    ofstream outFile("groceryDeal.txt", ios::app);
-    if (!outFile) {
-        cerr << "Unable to open file 'groceryDeal.txt' for writing.\n";
-        return;
-    }
-    outFile << deal << endl;
-    cout << "Deal added successfully for grocery.\n";
-}
-
-void displayGroceriesToBuy() {
-    ifstream inFile("grocery.txt");
-    if (!inFile) {
-        cerr << "Unable to open file 'grocery.txt' for reading.\n";
-        return;
-    }
-
-    cout << "Available Groceries:\n";
-    string line;
-    while (getline(inFile, line)) {
-        cout << line << endl;
-    }
-}
-
-void buyGrocery() {
-    displayGroceriesToBuy();
-    string groceryName;
-    cout << "Enter the name of the grocery you want to buy: ";
-    cin.ignore();
-    getline(cin, groceryName);
-
-    ifstream inFile("grocery.txt");
-    if (!inFile) {
-        cerr << "Unable to open file 'grocery.txt' for reading.\n";
-        return;
-    }
-
-    string line;
-    bool found = false;
-    float price = 0.0; 
-    while (getline(inFile, line)) {
-        stringstream ss(line);
-        string productName;
-        float productPrice;
-
-        getline(ss, productName, ',');
-        ss >> productPrice;
-
-        if (productName == groceryName) {
-            found = true;
-            price = productPrice; 
-            break;
-        }
-    }
-
-    if (found) {
-        cout << "You purchased the grocery: " << groceryName << endl;
-        srand(time(0));
-        int deliveryTime = rand() % 7 + 1;
-        cout << "Estimated Delivery Time: " << deliveryTime << " days\n";
-    } 
-    else {
-        cout << "Error: Grocery not found.\n";
-    }
-}
-
-void displayGroceryDealsToBuy() {
-    ifstream inFile("groceryDeal.txt");
-    if (!inFile) {
-        cerr << "Unable to open file 'groceryDeal.txt' for reading.\n";
-        return;
-    }
-
-    cout << "Available Grocery Deals:\n";
-    string line;
-    int index = 1;
-    while (getline(inFile, line)) {
-        cout << index++ << ". " << line << endl;
-    }
-}
-
-void buyGroceryDeal() {
-    displayGroceryDealsToBuy();
-    int dealNumber;
-    cout << "Enter the deal number you want to buy: ";
-    cin >> dealNumber;
-
-    ifstream inFile("groceryDeal.txt");
-    if (!inFile) {
-        cerr << "Unable to open file 'groceryDeal.txt' for reading.\n";
-        return;
-    }
-
-    string line;
-    int index = 1;
-    bool found = false;
-    float price = 0.0; 
-    while (getline(inFile, line)) {
-        if (index == dealNumber) {
-            found = true;
-            stringstream ss(line);
-            ss >> price; 
-            break;
-        }
-        index++;
-    }
-
-    if (found) {
-        cout << "You purchased deal number: " << dealNumber << endl;
-    } else {
-        cout << "Error: Deal not found.\n";
-    }
-}
 };
 
 class OnlineStore : public Product {
@@ -1452,6 +1314,7 @@ int main() {
 
     setBackgroundColor(BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
     std::cout << "\n\n\n\n\n\n\n\t\t\t\t\t- - - - MULTIPURPOSE ONLINE SHOPPING STORE - - - - -\n\n\n\n\n\n\n";
+    system("pause");
     Sleep(1000);
     system("cls");
     setBackgroundColor(BACKGROUND_GREEN | BACKGROUND_BLUE);
@@ -1460,6 +1323,7 @@ int main() {
     std::cout << "\t\t\tMuhammad Maaz Nizami (23k-2052)\n";
     std::cout << "\t\t\tMuhammad Tamseel Khanzada (23k-2063)\n";
     Sleep(1000);
+    system("pause");
     system("cls");
 
     setBackgroundColor(BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
